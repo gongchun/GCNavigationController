@@ -67,7 +67,7 @@
 //设置导航状态栏的背景颜色
 -(void)setStatusBarBackgroundColor:(UIColor *)color{
     if (self.gc_navigationbar) {
-        self.gc_navigationbar.backgroundColor = color;
+        self.gc_navigationbar.statusBarBackgroundColor = color;
     }
 }
 

@@ -18,6 +18,32 @@
 
 @implementation GCNavigationBar
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self UIInit];
+    }
+    return self;
+}
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self UIInit];
+    }
+    return self;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self UIInit];
+    }
+    return self;
+}
 
 -(void)UIInit{
     //设置背景颜色
@@ -69,7 +95,9 @@
     [super layoutSubviews];
     CGFloat statusBarHeight = 20.0f;
     CGFloat leftOrRightMargin = 10.0f;
-    self.statusBarView.frame = CGRectMake(0.0f, 0.0f, self.bounds.size.width, statusBarHeight);
+//    self.statusBarView.frame = CGRectMake(0.0f, 0.0f, self.bounds.size.width, statusBarHeight);
+    self.statusBarView.frame = CGRectMake(0.0f, 0.0f, 520.0f, 100);
+
     self.contentView.frame = CGRectMake(0, statusBarHeight, self.bounds.size.width, self.bounds.size.height - statusBarHeight);
     self.titleView.frame = CGRectOffset(self.titleView.bounds, (self.contentView.bounds.size.width-self.titleView.bounds.size.width)/2, (self.contentView.bounds.size.height-self.titleView.bounds.size.height)/2);
     if (_leftButton) {
@@ -92,7 +120,7 @@
 }
 
 -(void)setTitle:(NSString *)title{
-    self.title = title;
+    _title = title;
     
     if (_titleView && [_titleView isKindOfClass:[UILabel class]]) {
         UILabel *titleLabel = ((UILabel *) self.titleView);
@@ -105,35 +133,35 @@
 
 
 -(void)setLeftButton:(UIButton *)leftButton{
-    if (self.leftButton) {
-        [self.leftButton removeFromSuperview];
-        self.leftButton = nil;
+    if (_leftButton) {
+        [_leftButton removeFromSuperview];
+        _leftButton = nil;
     }
-    self.leftButton = leftButton;
-    [self.contentView addSubview:self.leftButton];
+    _leftButton = leftButton;
+    [self.contentView addSubview:_leftButton];
 }
 
 -(void)setLeftView:(UIView *)leftView{
-    if (self.leftButton) {
-        [self.leftButton removeFromSuperview];
-        self.leftButton = nil;
+    if (_leftButton) {
+        [_leftButton removeFromSuperview];
+        _leftButton = nil;
     }
     
-    if (self.leftView) {
-        [self.leftView removeFromSuperview];
-        self.leftView = nil;
+    if (_leftView) {
+        [_leftView removeFromSuperview];
+        _leftView = nil;
     }
-    self.leftView = leftView;
-    [self.contentView addSubview:self.leftView];
+    _leftView = leftView;
+    [self.contentView addSubview:_leftView];
 }
 
 -(void)setRightView:(UIView *)rightView{
-    if (self.rightView) {
-        [self.rightView removeFromSuperview];
-        self.rightView = nil;
+    if (_rightView) {
+        [_rightView removeFromSuperview];
+        _rightView = nil;
     }
-    self.rightView = rightView;
-    [self.contentView addSubview:self.rightView];
+    _rightView = rightView;
+    [self.contentView addSubview:_rightView];
 }
 
 -(UIView *)contentView{
